@@ -1,0 +1,81 @@
+services:
+  # =========================
+  # Servicio de autenticacion y administracion
+  # =========================
+  user-admin:
+    # Construye la imagen desde el Dockerfile
+    build:
+      context: ./user-admin-service
+      dockerfile: Dockerfile
+
+    # Nombre del contenedor
+    container_name: user-admin
+
+    # Mapea el puerto del host al del contenedor
+    # host:container
+    ports:
+      - 5001:5001
+
+    # Volumen para la persistencia de datos del servicio
+    volumes:
+      - user-admin-db:/app/db
+    
+    # Variables de entorno
+    environment:
+      - FLASK_DEBUG=${FLASK_DEBUG}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - USERS_ADMIN_DB_PATH=${USERS_ADMIN_DB_PATH}
+      - DEFAULT_USER=${DEFAULT_USER}
+      - DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+      - USERS_ADMIN_PORT=${USERS_ADMIN_PORT}
+    
+    # Reininciar el contenedor automaticamente salvo que este se pare manualmente
+    restart: unless-stopped
+
+  # =========================
+  # Servicio de gestión de citas
+  # =========================
+  citas-service:
+    # Construye la imagen desde el Dockerfile
+    build:
+      context: ./citas-service
+      dockerfile: Dockerfile
+    
+    # Nombre del contenedor
+    container_name: citas
+
+    # Mapea el puerto del host al del contenedor
+    # host:container
+    ports:
+      - 5002:5002
+
+    # Volumen para la persistencia de datos del servicio
+    volumes:
+      - citas-db:/app/db
+
+    # Variables de entorno
+    environment:
+      - FLASK_DEBUG=${FLASK_DEBUG}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - APPOINTMENTS_DB_PATH=${APPOINTMENTS_DB_PATH}
+      - APPOINTMENTS_PORT=${APPOINTMENTS_PORT}
+      # Url interna para comunicarse con el servicio de autenticacion y admin
+      - USER_ADMIN_SERVICE_URL=http://user-admin:5001
+
+    # Reininciar el contenedor automaticamente salvo que este se pare manualmente
+    restart: unless-stopped
+
+    # Se asegura que el servicio user-admin se ha iniciado para evitar conflictos
+    depends_on:
+      - user-admin
+
+# =========================
+# Definición de volúmenes
+# =========================
+volumes:
+  # Volumen para datos del servicio autenticacion y admin
+  user-admin-db:
+    name: user-admin-db
+  # Volumen para datos del servicio de gestión de citas
+  citas-db:
+    name: citas-db
