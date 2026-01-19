@@ -1,0 +1,5 @@
+flask
+flask_sqlalchemy
+PyJWT
+python-dotenv
+jsonschema

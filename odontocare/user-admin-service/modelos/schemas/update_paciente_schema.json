@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Paciente",
+    "description": "Schema for validating patient creation",
+    "type": "object",
+    "properties": {
+        "telefono": {
+            "type": "string",
+            "description": "Teléfono del paciente",
+            "minLength": 9
+        },
+        "estado": {
+            "type": "string",
+            "description": "Estado del paciente (Activo / Inactivo)",
+            "enum": ["activo", "inactivo"]
+        }
+    },
+    "required": ["telefono", "estado"],
+    "additionalProperties": false
+}

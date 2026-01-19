@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Paciente",
+    "description": "Schema for validating patient creation",
+    "type": "object",
+    "properties": {
+        "id_usuario": {
+            "type": "integer",
+            "description": "user id"
+        },
+        "nombre": {
+            "type": "string",
+            "description": "Nombre del paciente",
+            "maxLength": 30
+        },
+        "apellido": {
+            "type": "string",
+            "description": "Apellido del paciente",
+            "maxLength": 30
+        },
+        "telefono": {
+            "type": "string",
+            "description": "Teléfono del paciente",
+            "minLength": 9
+        },
+        "estado": {
+            "type": "string",
+            "description": "Estado del paciente (Activo / Inactivo)",
+            "enum": ["activo", "inactivo"]
+        }
+    },
+    "required": ["nombre", "apellido", "telefono", "estado"],
+    "additionalProperties": false
+}
