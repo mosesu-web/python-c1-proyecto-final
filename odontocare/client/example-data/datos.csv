@@ -1,0 +1,27 @@
+table_name:usuarios
+username,password,rol
+admin1,ClinicaDental2025,admin
+secre_pamplona,Recep2025!,secretariat
+secre_bilbao,Secretaria25,secretariat
+
+table_name:doctores
+nombre,apellido,especialidad
+Carlos,López,Ortodoncia
+Ana,Martín,Periodoncia
+Javier,García,Endodoncia y estética
+
+table_name:pacientes
+nombre,apellido,telefono,estado
+Ana,Jiménez,645128934,inactivo
+Juan Carlos,Rodríguez,622456789,inactivo
+María,López,656987321,inactivo
+Carlos,Martínez,633214567,activo
+Laura,Fernández,699874563,activo
+Pedro,González,644321098,activo
+
+table_name:centros
+nombre,direccion
+Clínica Dental Pamplona,"C/ San Nicolás 12, 31001 Pamplona, Navarra"
+Clínica Dental Bilbao,"Avda. Lehendakari Aguirre 45, 48014 Bilbao, Bizkaia"
+Clínica Dental Vitoria,"Portal de Castilla 22, 01007 Vitoria-Gasteiz, Álava"
+Clínica Dental Donostia,"Paseo de Francia 18, 20012 Donostia-San Sebastián, Gipuzkoa"
