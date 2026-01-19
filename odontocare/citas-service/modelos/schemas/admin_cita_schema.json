@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Cita",
+    "description": "Schema for validating appointment creation for an admin role",
+    "type": "object",
+    "properties": {
+        "fecha": {
+            "type": "string",
+            "description": "fecha de la cita",
+            "format": "date"
+        },
+        "motivo": {
+            "type": "string",
+            "description": "motivo de la cita",
+            "maxLength": 255
+        },
+        "estado": {
+            "type": "string",
+            "description": "Estado de la cita (Activa/Cancelada)",
+            "enum": ["Activa", "Pendiente", "Cancelada"]
+        },
+        "id_paciente": {
+            "type": "integer",
+            "description": "id del paciente"
+        },
+        "id_doctor": {
+            "type": "integer",
+            "description": "id del doctor"
+        },
+        "id_centro": {
+            "type": "integer",
+            "description": "id del centro"
+        }
+    },
+    "required": ["fecha", "motivo", "estado", "id_paciente", "id_doctor", "id_centro"],
+    "additionalProperties": false
+}
